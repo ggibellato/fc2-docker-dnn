@@ -1,0 +1,3 @@
+docker build -t ggibellato/fc2-docker-dnn-nginx .
+
+docker run --rm --name nginx --network=mynetwork -p 8080:80 ggibellato/fc2-docker-dnn-nginx
