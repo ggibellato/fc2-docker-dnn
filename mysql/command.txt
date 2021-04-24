@@ -1,0 +1,7 @@
+docker build -t ggibellato/fc2-docker-dnn-mysql .
+
+docker run --rm --name mysql --network=mynetwork -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=nodedb -v $(pwd)/data:/var/lib/mysql ggibellato/fc2-docker-dnn-mysql
+
+docker exec -it mysql bash -l
+
+docker stop mysql

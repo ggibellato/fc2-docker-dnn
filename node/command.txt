@@ -1,0 +1,9 @@
+docker build -t ggibellato/fc2-docker-dnn-node .
+
+
+docker run --rm --name node --network=mynetwork -v $(pwd):/usr/app ggibellato/fc2-docker-dnn-node
+
+docker run --rm --name node --network=mynetwork -v $(pwd):/usr/app -ti ggibellato/fc2-docker-dnn-node bash
+
+
+docker exec -it node bash -l
