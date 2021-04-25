@@ -1,2 +1,3 @@
+ALTER DATABASE nodedb CHARACTER SET UTF8 COLLATE utf8_unicode_ci;
 USE nodedb;
-CREATE TABLE people(id int NOT NULL AUTO_INCREMENT, name varchar(255), PRIMARY KEY(id));
+CREATE TABLE people(id int NOT NULL AUTO_INCREMENT, name varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL, PRIMARY KEY(id));

@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+
+    node:
+        image: ggibellato/fc2-docker-dnn-node
+        container_name: node
+        entrypoint: node index.js
+        depends_on: 
+            - mysql
+        volumes: 
+            - ./node:/usr/app
+        networks: 
+            - mynetwork
+
+    nginx:
+        image: ggibellato/fc2-docker-dnn-nginx
+        container_name: nginx
+        ports:
+            - "8080:80"
+        depends_on: 
+            - node
+        networks:
+            - mynetwork
+
+    mysql:
+        image: ggibellato/fc2-docker-dnn-mysql
+        container_name: mysql
+        restart: always
+        tty: true
+        volumes: 
+            - ./mysql/data:/var/lib/mysql
+        networks:
+            - mynetwork
+
+networks:
+    mynetwork:
+        driver: bridge
