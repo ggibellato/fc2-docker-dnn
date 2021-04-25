@@ -3,9 +3,11 @@ version: '3'
 services:
 
     node:
+        build: 
+            context: node
         image: ggibellato/fc2-docker-dnn-node
         container_name: node
-        entrypoint: node index.js
+        entrypoint: dockerize -wait tcp://mysql:3306 -timeout 60s node index.js
         depends_on: 
             - mysql
         volumes: 
@@ -14,8 +16,11 @@ services:
             - mynetwork
 
     nginx:
+        build: 
+            context: nginx
         image: ggibellato/fc2-docker-dnn-nginx
         container_name: nginx
+        entrypoint: dockerize -wait http://node:3000 -timeout 60s /bin/sh -c "nginx -g 'daemon off;'"
         ports:
             - "8080:80"
         depends_on: 
@@ -24,6 +29,8 @@ services:
             - mynetwork
 
     mysql:
+        build: 
+            context: mysql
         image: ggibellato/fc2-docker-dnn-mysql
         container_name: mysql
         restart: always
